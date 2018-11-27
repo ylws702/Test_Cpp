@@ -71,6 +71,7 @@ ParkDragoman::ParkDragoman(std::ifstream& inFile)
     buffer << inFile.rdbuf();
     std::string line;
     std::vector<std::string> pathStrings;
+    int n;
     while (buffer)
     {
         switch (GetNonSpaceChar(buffer))
@@ -79,7 +80,11 @@ ParkDragoman::ParkDragoman(std::ifstream& inFile)
             buffer >> line;
             std::getline(buffer, line);
             RemoveSpace(line);
-            line.find_first_of
+            if (line.size()<=2||line[1]!='=')
+            {
+                continue;
+            }
+            std::from_chars(line.c_str() + 2, line.c_str() + line.size(), n);
 
 
         default:
